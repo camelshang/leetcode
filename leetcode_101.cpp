@@ -29,6 +29,7 @@ bool leftRight(TreeNode *p, TreeNode *q) {
          leftRight(p->right, q->left);
 }
 
+// iteration with two queue
 bool isSymmetric(TreeNode *root) {
   if (root == nullptr) {
     return true;
@@ -41,7 +42,10 @@ bool isSymmetric(TreeNode *root) {
     left = q1.front();
     q1.pop();
     right = q2.front();
-    q2.pop() if (left == nullptr && right == nullptr) { continue; }
+    q2.pop();
+    if (left == nullptr && right == nullptr) {
+      continue;
+    }
     if (left == nullptr || right == nullptr) {
       return false;
     }
@@ -52,6 +56,36 @@ bool isSymmetric(TreeNode *root) {
     q1.push(left->right);
     q2.push(right - right);
     q2.push(right->left);
+  }
+  return true;
+}
+
+// iteration with one queue
+bool isSymmetric(TreeNode *root) {
+  if (root == nullptr) {
+    return true;
+  }
+  queue<TreeNode *> q;
+  q.push(root->left);
+  q.push(root->right);
+  while (!q.empty()) {
+    TreeNode *t1 = q.front();
+    q.pop();
+    TreeNode *t2 = q.front();
+    q.pop();
+    if (t1 == nullptr && t2 == nullptr) {
+      continue;
+    }
+    if (t1 == nullptr || t2 == nullptr) {
+      return false;
+    }
+    if (t1->val != t2->val) {
+      return false;
+    }
+    q.push(t1->left);
+    q.push(t2->right);
+    q.push(t1->right);
+    q.push(t2->left);
   }
   return true;
 }
