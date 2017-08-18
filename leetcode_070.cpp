@@ -2,7 +2,7 @@
 
 // f(n) = f(n-1) + f(n-2)
 
-// recursive -> cost time
+// recursive -> O(2^n)   time limited
 int climbStairs(int n) {
   if (n < 3) {
     return n;
